@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>FINAL CODE</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <script>
+		// document.getElementById("id");
+		var n = 4;
+		var randomArray = [n];
+		var userArray = [" ", " ", " ", " "];
+		var A = 0;
+		var B = 0;
+		var current = 0;
+    var count = 1;
+
+		getRandomArray(0,9,n);
+		// document.getElementById("show").innerHTML = "0A0B";
+
+
+
+		function getRandom(minNum, maxNum) {	//取得 minNum(最小值) ~ maxNum(最大值) 之間的亂數
+			return Math.floor( Math.random() * (maxNum - minNum + 1) ) + minNum;
+		}
+
+		function getRandomArray(minNum, maxNum, n) {	//隨機產生不重覆的n個數字
+			for(var i=0; i<n; i++) {
+				var rdm = 0;		//暫存的亂數
+				do {
+					var exist = false;			//此亂數是否已存在
+					rdm = getRandom(minNum, maxNum);	//取得亂數
+					if(randomArray.indexOf(rdm) != -1) exist = true;//檢查亂數是否存在於陣列中，若存在則繼續回圈
+		 		} while (exist);	//產生沒出現過的亂數時離開迴圈
+
+				randomArray[i] = rdm;
+			}
+			return true;
+		}
+
+
+		// for(i=0; i<randomArray.length; i++){
+		// 	document.write(randomArray[i]);
+		// }
+
+		function check(){
+			for(i=0; i<n; i++){
+				if(userArray[i] == randomArray[i]){
+					A++;
+				}else{
+					for(j=0; j<n; j++){
+						if(userArray[i] == randomArray[j]){
+							B++;
+						}
+					}
+				}
+
+			}
+      document.getElementById("show").innerHTML += count+"   ";
+      document.getElementById("show").innerHTML += userArray[0];
+      document.getElementById("show").innerHTML += userArray[1];
+      document.getElementById("show").innerHTML += userArray[2];
+      document.getElementById("show").innerHTML += userArray[3];
+			document.getElementById("show").innerHTML += "   "+A+"A"+B+"B"+"             ";
+       if (count>10){
+          //btnenter.onclick="windows.localtoin.href=https://google.com";
+          window.location.href="https://i.imgur.com/rr4CIkG.jpg";
+
+       }
+      count++;
+			A = 0;
+			B = 0;
+		}
+		// check();
+		// document.write("A="+A+"B="+B);
+		function cleartext(){
+			A = 0;
+			B = 0;
+			current = 0;
+			for(i=0; i<n; i++){
+				userArray[i] = " ";
+			}
+
+			// 把介面上的輸入欄位變空白
+			document.getElementById("u0").value = " ";
+			document.getElementById("u1").value = " ";
+			document.getElementById("u2").value = " ";
+			document.getElementById("u3").value = " ";
+			document.getElementById("btn0").disabled = false;
+			document.getElementById("btn1").disabled = false;
+			document.getElementById("btn2").disabled = false;
+			document.getElementById("btn3").disabled = false;
+			document.getElementById("btn4").disabled = false;
+			document.getElementById("btn5").disabled = false;
+			document.getElementById("btn6").disabled = false;
+			document.getElementById("btn7").disabled = false;
+			document.getElementById("btn8").disabled = false;
+			document.getElementById("btn9").disabled = false;
+
+		}
+
+		function btnClick(val){
+			userArray[current] = val;
+			document.getElementById("u"+current).value = val;
+			document.getElementById("btn"+val).disabled = "enabled";
+			current++;
+		}
+
+		function reset(){
+			getRandomArray(0,9,n);
+			cleartext();
+			alert("重設完畢");
+		}
+		</script>
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>
+				超終極之史上最坑爹密碼
+			</h3>
+      <div>
+        <input class="textbox" type="text" name="u0" id="u0">
+        <input class="textbox" type="text" name="u1" id="u1">
+        <input class="textbox" type="text" name="u2" id="u2">
+        <input class="textbox" type="text" name="u3" id="u3">
+      </div>
+      <br>
+			<div class="divDisplay">
+        <button id="btn1"  onclick="btnClick(1)" class="btn btn-default">1</button>
+        <button id="btn2"  onclick="btnClick(2)" class="btn btn-default">2</button>
+        <button id="btn3"  onclick="btnClick(3)" class="btn btn-default">3</button>
+        <br>
+        <button id="btn4"  onclick="btnClick(4)" class="btn btn-default">4</button>
+        <button id="btn5"  onclick="btnClick(5)" class="btn btn-default">5</button>
+        <button id="btn6"  onclick="btnClick(6)" class="btn btn-default">6</button>
+        <br>
+        <button id="btn7"  onclick="btnClick(7)" class="btn btn-default">7</button>
+        <button id="btn8"  onclick="btnClick(8)" class="btn btn-default">8</button>
+        <button id="btn9"  onclick="btnClick(9)" class="btn btn-default">9</button>
+        <br>
+        <button id="btn0"  onclick="btnClick(0)" class="btn btn-default">0</button>
+        <button id="btn"  onclick="cleartext()" class="btn btn-default">←</button>
+        <button id="btnenter"  onclick="check()" class="btn btn-default">ENTER</button>
+      </div>
+      <br>
+        <textarea id="show" readonly="true" class="show"></textarea>
+			<h2>
+		RULE
+			</h2>
+			<p>
+        題目是一個4位數(數字0~9且不重複)請你猜猜看，猜完後我會給你一個提示，<br>
+        例如：1A2B，表示其中有1個數字不但猜對了，位置也正確，另有2個數字被猜中了，<br>
+        但位置不正確，請用最少的次數把這個數猜出來吧！
+			</p>
+			<p>
+				<a class="btn" href="http://198.105.218.109/data/attachment/forum/201308/12/0826269tiijjn2nnphr6tz.jpg">提示(看完回上一頁) »</a>
+        <br>
+        <br>
+        <input type="button" name="name" value="提示(看完回上一頁) 2.0" onclick="alert('騙你的哪有提示 XD')">
+        <br>
+        <br>
+        <script type="text/javascript">
+          function run() {
+            for (var i = 10; i > 0; i--) {
+              alert('騙你的哪有提示 XD，再按' + i + '次吧ㄎㄎ');
+            }
+          }
+        </script>
+        <input type="button" name="name" value="提示(看完回上一頁) 3.0" onclick="run()">
+      </p>
+			 <a id="modal-900577" href="#modal-container-900577" role="button" class="btn" data-toggle="modal"></a>
+
+			<div class="modal fade" id="modal-container-900577" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Modal title
+							</h4>
+						</div>
+						<div class="modal-body">
+							...
+						</div>
+						<div class="modal-footer">
+
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+							<button type="button" class="btn btn-primary">
+								Save changes
+							</button>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+  <style>
+    .show{
+      height:300px;
+    }
+    .textbox {
+      border: 3px groove #FFA5A5;
+        outline:0;
+        height:175px;
+        width: 175px;
+        font-size:60px;
+        text-align: center;
+      }
+      .divDisplay{
+        display: block;;
+        float:inherit;
+        margin: 20px;
+        border: 7px;
+      }
+    </style>
+</html>
